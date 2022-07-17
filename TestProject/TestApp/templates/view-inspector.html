@@ -1,0 +1,45 @@
+{% extends 'admin-home.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block title %}
+    <title>ViewInspector</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    {% endblock %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<body>
+    {% block content %} 
+    <center><h2>View Inspector</h2></center><br>
+    <div class="container">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>ContactNumber</th>
+                <th>EmailAddress</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in viewdata %}
+            <tr>
+                <td>{{i.FullName}}</td>
+                <td>{{i.ContactNumber}}</td>
+                <td>{{i.EmailAddress}}</td>
+                <td>{{i.Username}}</td>
+                <td>{{i.Password}}</td>
+                <td>
+                    <a class="edit" href="editinspector/{{i.id}}" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,49 @@
+{% extends 'coordinator-home.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block title %}
+    <title>JobMaster</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    {% endblock %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<body>
+    {% block content %} 
+    <center><h2>Job Master</h2></center>
+    <form action="jobmaster" method="post">
+        {% csrf_token %}
+        <div class="container col-6">
+        InspectorName 
+        <select class="form-select" name="iname" style="height:40px ;" aria-label="Default select example">
+            <option selected>---Select---</option>
+            {% for i in inspectordata %}
+            <option value="{{i.id}}">{{i.FullName}}</option>
+            {% endfor %}
+
+        </select><br>
+        ClientName 
+        <select class="form-select" name="cname" style="height:40px ;" aria-label="Default select example">
+            <option selected>---Select---</option>
+            {% for i in clientdata %}
+            <option value="{{i.id}}">{{i.ClientName}}</option>
+            {% endfor %}
+
+        </select><br>
+        ClientLocation 
+        <select class="form-select" name="clocation" style="height:40px ;" aria-label="Default select example">
+            <option selected>---Select---</option>
+            {% for i in clientdata %}
+            <option value="{{i.Location}}">{{i.Location}}</option>
+            {% endfor %}
+
+        </select><br>
+        ScheduleDate <input type="date" name="date" class="form-control"><br>
+        <input type="submit" value="Add" class="btn btn-success btn-lg" style="margin-left:35%">
+    </div>
+
+    </form>
+    {% endblock %}
+</body>
+</html>

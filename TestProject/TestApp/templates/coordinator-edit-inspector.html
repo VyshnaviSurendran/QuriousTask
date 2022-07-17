@@ -1,0 +1,61 @@
+{% extends 'coordinator-home.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block title %}
+    <title>EditInspector</title>
+    {% endblock %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    {% block content %} 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <style>
+        #imageUpload
+        {
+            display: none;
+        }
+
+        #image
+        {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <center><h2>Edit Inspector</h2></center><br>
+    <form action="/coordinatorupdateinspector/{{editdata.id}}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="container col-6">
+            <div style="margin-left:35%">
+        <img class="rounded-circle" width="150" height="150" src="../media/{{editdata.Photo}}" id="image">
+        <input id="imageUpload" type="file" name="profile_photo" placeholder="Photo" onchange="changeImage(this)"><br>
+        <label style="color:red">Change profile photo</label></div>
+       
+        FullName <input type="text" id="name" name="fname" value="{{editdata.FullName}}" class="form-control"><br>
+        ContactNumber <input type="text" name="contact" value="{{editdata.ContactNumber}}" class="form-control"><br>
+        EmailAddress <input type="email" name="email" value="{{editdata.EmailAddress}}" class="form-control"><br>
+        Username <input type="text" name="uname" value="{{editdata.Username}}" class="form-control"><br>
+        Password <input type="text" name="pass" value="{{editdata.Password}}" class="form-control"><br>
+        <!-- <img src="../{{editdata.Photo}}" name="photo" value="{{editdata.Photo}}" hidden><br> -->
+        <input type="hidden" name="photo" value="{{editdata.Photo}}">
+
+        <input type="submit" value="Update" class="btn btn-success btn-lg" style="margin-left:35%">
+    </div>
+
+    </form>
+</body>
+</html>
+<script>
+    $("#image").click(function(e) {
+        $("#imageUpload").click();
+    });
+
+    function changeImage(data){
+        const [file] = imageUpload.files
+        if (file) {
+            image.src = URL.createObjectURL(file)
+        }
+
+    }
+</script>
+{% endblock %}
